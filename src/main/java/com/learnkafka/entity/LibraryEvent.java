@@ -6,7 +6,6 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -22,4 +21,5 @@ public class LibraryEvent {
     @OneToOne(mappedBy = "libraryEvent", cascade = {CascadeType.ALL})
     @ToString.Exclude
     private Book book;
+
 }
