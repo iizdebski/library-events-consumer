@@ -166,7 +166,8 @@ public class LibraryEventsConsumerIntegrationTest {
         CountDownLatch latch = new CountDownLatch(1);
         latch.await(3, TimeUnit.SECONDS);
 
-        verify(libraryEventsConsumerSpy, atLeast(3)).onMessage(isA(ConsumerRecord.class));
-        verify(libraryEventsServiceSpy, atLeast(3)).processLibraryEvent(isA(ConsumerRecord.class));
+        //verify(libraryEventsConsumerSpy, atLeast(3)).onMessage(isA(ConsumerRecord.class));
+        verify(libraryEventsServiceSpy, atLeast(4)).processLibraryEvent(isA(ConsumerRecord.class));
+        verify(libraryEventsServiceSpy, atLeast(1)).handleRecovery(isA(ConsumerRecord.class));
     }
 }
