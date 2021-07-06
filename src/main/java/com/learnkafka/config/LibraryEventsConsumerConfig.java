@@ -36,6 +36,17 @@ public class LibraryEventsConsumerConfig {
             //persist
         }));
         factory.setRetryTemplate(retryTemplate());
+        factory.setRecoveryCallback((context -> {
+            if(context.getLastThrowable().getCause() instanceof RecoverableDataAccessException) {
+                // invoke recovery logic
+                log.info("Inside the recoverable logic");
+            } else {
+                log.info("Inside the non recoverable logic");
+                throw new RuntimeException(context.getLastThrowable().getMessage());
+            }
+
+            return null;
+        }));
         return factory;
     }
 
